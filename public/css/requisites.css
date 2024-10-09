@@ -1,0 +1,30 @@
+/* public/css/requisites.css */
+
+* {
+    color: white;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.contacts {
+    width: max-content;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    margin: 1rem;
+    height: max-content;
+}
+
+.tel, .email, .time {
+    padding-top: 0.5rem;
+}
+
+.img {
+    padding: 1rem;
+    margin: 1rem;
+}
+
+img {
+    height: 80vh;
+}

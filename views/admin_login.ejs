@@ -1,0 +1,110 @@
+<!-- views/admin_login.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель - Вход</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css"> <!-- Убедитесь, что этот файл существует -->
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Логотип -->
+                <a href="../index.html">
+                    <p>LED System Media</p>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">КОМПАНИЯ</a>
+                <a href="../catalog.html">ТОВАРЫ</a>
+                <a href="../requisites.html">КОНТАКТЫ</a>
+            </div>
+            <div class="telephone header-telephone">
+                <div class="telephone-numbers">
+                    <p class="primary-number">+7 705 371 02 50</p>
+                    <p class="secondary-number">+7 705 444 77 03</p>
+                </div>
+                <span class="arrow">&#9660;</span> <!-- Стрелка вниз -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <h1>Вход в админ-панель</h1>
+
+            <!-- Всплывающие уведомления -->
+            <% if (success_msg && success_msg.length> 0) { %>
+                <div class="toast success">
+                    <%= success_msg %>
+                </div>
+                <% } %>
+
+                    <% if (error_msg && error_msg.length> 0) { %>
+                        <div class="toast error">
+                            <%= error_msg %>
+                        </div>
+                        <% } %>
+
+                            <% if (loggedOut) { %>
+                                <div class="toast success">
+                                    Вы успешно вышли из админ-панели
+                                </div>
+                                <% } %>
+
+                                    <form action="/admin/login" method="POST">
+                                        <!-- Добавляем CSRF-токен -->
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                        <label for="username">Имя пользователя:</label>
+                                        <input type="text" id="username" name="username"
+                                            value="<%= typeof username !== 'undefined' ? username : '' %>" required>
+
+                                        <label for="password">Пароль:</label>
+                                        <input type="password" id="password" name="password" required>
+
+                                        <button type="submit" class="form-login-button">Войти</button>
+                                    </form>
+        </div>
+    </main>
+    <footer>
+        <p id="license">&copy; 2024 ТОО «LED System Media»</p>
+        <div class="nav-links">
+            <a href="/index.html">КОМПАНИЯ</a>
+            <a href="/catalog.html">ТОВАРЫ</a>
+            <a href="/requisites.html">КОНТАКТЫ</a>
+        </div>
+        <div class="telephone footer-telephone">
+            <div class="telephone-numbers">
+                <p class="primary-number">+7 705 371 02 50</p>
+                <p class="secondary-number">+7 705 444 77 03</p>
+            </div>
+            <span class="arrow">&#9650;</span> <!-- Стрелка вверх -->
+        </div>
+    </footer>
+
+    <!-- Всплывающие уведомления -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.toast');
+            toasts.forEach(toast => {
+                if (toast) {
+                    // Показать уведомление
+                    toast.classList.add('show');
+
+                    // Скрыть уведомление через 3 секунды
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

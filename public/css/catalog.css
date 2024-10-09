@@ -1,0 +1,163 @@
+/* public/css/catalog.css */
+
+/* Установка фонового изображения */
+body {
+    background-image: url('../images/3.jpg'); /* Путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения для покрытия всей области */
+    margin: 0; /* Удаление внешних отступов */
+    padding: 0; /* Удаление внутренних отступов */
+}
+
+/* Обеспечиваем, чтобы header был поверх фонового изображения */
+header {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный тёмный фон для читаемости текста */
+}
+
+/* Остальные стили без изменений */
+
+main {
+    color: white;
+    text-align: center;
+}
+
+/* Список продуктов */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+/* Карточка продукта */
+.product-card {
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border-radius: 8px;
+    padding: 1rem;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный тёмный фон */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Лёгкая тень */
+    text-align: left; /* Выравнивание текста по левому краю */
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer; /* Курсор указателя при наведении */
+}
+
+.product-card:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Более тёмный фон при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Изображение продукта */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Название продукта */
+.product-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Контейнер описания */
+.description-container {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: white;
+    text-align: left;
+}
+
+/* Заголовок описания */
+.description-container strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Абзацы описания */
+.description-container p {
+    margin: 0.25rem 0;
+    line-height: 1.4;
+}
+
+/* Всплывающие уведомления (toasts) */
+.toast {
+    position: fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    color: #ffffff; /* Белый текст */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    z-index: 1000;
+    font-size: 1rem;
+    cursor: pointer; /* Курсор указателя для интерактивности */
+}
+
+.toast.success {
+    background-color: var(--secondary-color); /* Вторичный цвет для успеха */
+}
+
+.toast.error {
+    background-color: #dc3545; /* Красный для ошибок */
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Добавленные стили для пагинации */
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 0.5rem;
+}
+
+#pagination button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    background-color: #ffffff;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination button:hover:not(.active) {
+    background-color: rgba(0, 200, 255, 0.9);
+    color: black;
+}
+
+#pagination button.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    cursor: default;
+}
+
+#pagination button:disabled {
+    background-color: gray;
+    color: black;
+    cursor: not-allowed;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .product-card {
+        width: 100%;
+    }
+}
+
+footer {
+    background-color: #1b1b1b;
+}

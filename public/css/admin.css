@@ -1,0 +1,214 @@
+/* public/css/admin.css */
+
+/* Определение переменных для удобства */
+:root {
+    --background-color: #333333; /* Основной тёмный фон */
+    --container-background: rgba(0,0,0,0.2); /* Фон контейнеров */
+    --text-color: white; /* Светлый текст */
+    --primary-color: rgba(0, 200, 255, 0.9);
+    --secondary-color: #28a745; /* Зелёный вторичный цвет */
+    --accent-color: rgba(0, 200, 255, 1);
+    --neutral-color: #555555; /* Нейтральный цвет для границ */
+}
+
+.admin-dashboard {
+    padding: 2rem;
+}
+
+/* Общие стили контейнеров */
+.login-container,
+.dashboard-container,
+.add-product-container,
+.edit-product-container,
+.change-password-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--container-background); /* Фон контейнеров */
+    color: var(--text-color);
+}
+
+/* Заголовки */
+h1,
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Светлый текст */
+}
+
+/* Метки форм */
+form label {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-color); /* Светлый текст */
+}
+
+/* Поля ввода */
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form textarea,
+form input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    box-sizing: border-box;
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border-radius: 4px;
+    resize: none; /* Отключает ручное изменение размера */
+    overflow: hidden; /* Скрывает полосу прокрутки */
+    background-color: #555555; /* Более тёмный фон полей ввода */
+    color: var(--text-color); /* Светлый текст */
+}
+
+/* Текстовые области */
+textarea {
+    min-height: 100px; /* Минимальная высота текстовых полей */
+}
+
+/* Кнопки */
+.form-login-button,
+.add-button,
+.edit-button,
+.delete-button,
+.button {
+    background-color: var(--primary-color); /* Основной цвет */
+    color: black; /* Белый текст */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.form-login-button,
+.add-button,
+.edit-button,
+.delete-button,
+.button {
+    padding: 0.5rem 1rem;
+}
+
+.form-login-button:hover,
+.add-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.button:hover {
+    background-color: var(--accent-color); /* Акцентный цвет при наведении */
+}
+
+/* Ошибки и успех */
+.errors {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 1rem;
+    color: #dc3545; /* Красный цвет для ошибок */
+}
+
+.error {
+    color: #dc3545; /* Красный цвет */
+    margin-bottom: 1rem;
+}
+
+.success {
+    color: var(--secondary-color); /* Зелёный цвет */
+    margin-bottom: 1rem;
+}
+
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table,
+th,
+td {
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    color: var(--text-color); /* Светлый текст в таблицах */
+}
+
+/* Изображение */
+.current-image {
+    max-width: 150px;
+    margin-top: 0.5rem;
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border-radius: 4px;
+}
+
+/* Всплывающие уведомления (toasts) */
+.toast {
+    position: fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    color: #ffffff; /* Белый текст */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    z-index: 1000;
+    font-size: 1rem;
+    cursor: pointer; /* Курсор указателя для интерактивности */
+}
+
+.toast.success {
+    background-color: var(--secondary-color); /* Зелёный для успеха */
+}
+
+.toast.error {
+    background-color: #dc3545; /* Красный для ошибок */
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Добавляем стили для кнопок внутри карточек, если есть */
+.product-card .button {
+    background-color: var(--primary-color); /* Основной цвет */
+    color: #ffffff; /* Белый текст */
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.product-card .button:hover {
+    background-color: var(--accent-color); /* Акцентный цвет при наведении */
+}
+
+.form-login-button {
+    margin-top: 1rem;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+}
+
+#add-product {
+    background-color: rgba(0, 200, 255, 0.9);
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#add-product:hover {
+    background-color: rgba(0, 200, 255, 1);
+}

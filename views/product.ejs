@@ -1,0 +1,97 @@
+<!-- views/product.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= product.name %> - ЭлектроТовары
+    </title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <!-- Подключение Google Fonts для улучшенной типографики -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Логотип -->
+                <a href="../index.html">
+                    <p>LED System Media</p>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">КОМПАНИЯ</a>
+                <a href="../catalog.html">ТОВАРЫ</a>
+                <a href="../requisites.html">КОНТАКТЫ</a>
+            </div>
+            <div class="telephone header-telephone">
+                <div class="telephone-numbers">
+                    <p class="primary-number">+7 705 371 02 50</p>
+                    <p class="secondary-number">+7 705 444 77 03</p>
+                </div>
+                <span class="arrow">&#9660;</span> <!-- Стрелка вниз -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-detail">
+            <img src="/uploads/<%= product.image %>" alt="<%= product.name %>">
+            <div class="product-info">
+                <p class="product-name">
+                    <%= product.name %>
+                </p>
+                <p class="product-price">Цена: <%= displayPrice %> ₸</p>
+
+                <div class="product-description">
+                    Описание:
+                    <% // Разделение описания на абзацы по символам новой строки (\n или \r\n) const
+                        paragraphs=product.description.split(/\r?\n/); paragraphs.forEach(paragraph=> {
+                        if (paragraph.trim() !== '') {
+                        %>
+                        <p>
+                            <%= paragraph.trim() %>
+                        </p>
+                        <% } }); %>
+                </div>
+
+                <div class="product-characteristics">
+                    Характеристики:
+                    <% // Разделение характеристик на абзацы по символам новой строки (\n или \r\n) const
+                        characteristics=product.characteristics.split(/\r?\n/); characteristics.forEach(characteristic=>
+                        {
+                        if (characteristic.trim() !== '') {
+                        %>
+                        <p>
+                            <%= characteristic.trim() %>
+                        </p>
+                        <% } }); %>
+                </div>
+
+                <!-- Кнопка "Назад в каталог" -->
+                <a href="/catalog.html" class="back-button">← Назад в каталог</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p id="license">&copy; 2024 ТОО «LED System Media»</p>
+        <div class="nav-links">
+            <a href="../index.html">КОМПАНИЯ</a>
+            <a href="../catalog.html">ТОВАРЫ</a>
+            <a href="../requisites.html">КОНТАКТЫ</a>
+        </div>
+        <div class="telephone footer-telephone">
+            <div class="telephone-numbers">
+                <p class="primary-number">+7 705 371 02 50</p>
+                <p class="secondary-number">+7 705 444 77 03</p>
+            </div>
+            <span class="arrow">&#9650;</span> <!-- Стрелка вверх -->
+        </div>
+    </footer>
+</body>
+
+</html>

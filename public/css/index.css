@@ -1,0 +1,242 @@
+/* public/css/index.css */
+
+/* Убираем отступы и устанавливаем базовые стили */
+body {
+    margin: 0;
+}
+
+/* Стили для шапки */
+header {
+    position: fixed;
+    /* Фиксированная позиция */
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Полупрозрачный фон для шапки */
+    z-index: 1000;
+    /* Высокий индекс для наложения поверх карусели */
+}
+
+/* Карусель */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    /* Высота карусели 80% от высоты окна просмотра */
+    margin-top: 0;
+    /* Убираем отступ сверху */
+    overflow: hidden;
+    z-index: 1;
+    /* Нижний слой */
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Изображение заполняет контейнер без искажений */
+    display: block;
+}
+
+/* Навигационные кнопки и индикаторы */
+.navigation-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+    /* Поверх шапки */
+}
+
+/* Индикаторы */
+.indicators {
+    display: flex;
+    flex-direction: row;
+    /* Располагаем индикаторы горизонтально */
+    gap: 10px;
+    margin-right: 10px;
+    /* Отступ между индикаторами и кнопками */
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* Навигационные кнопки */
+.prev,
+.next {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    /* Круглая форма */
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Убираем лишние отступы у main */
+main {
+    margin: 0;
+    padding: 0;
+    /* padding-top: 60px; */
+    /* Убираем отступ, чтобы карусель начиналась с верха */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+
+    .prev,
+    .next {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .navigation-buttons {
+        bottom: 15px;
+        right: 15px;
+        gap: 8px;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .prev,
+    .next {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .navigation-buttons {
+        bottom: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+hr {
+    margin-top: -2rem;
+}
+
+/* Секция о компании и характеристиках */
+.about-company {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    color: #ffffff; /* Светлый текст */
+}
+
+.content-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.company-info,
+.company-characteristics {
+    flex: 1 1 45%;
+}
+
+.company-info h2,
+.company-characteristics h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ffffff;
+    display: inline-block;
+}
+
+.company-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.company-characteristics ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.company-characteristics li {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.company-characteristics li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.company-characteristics strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+
+    .company-info,
+    .company-characteristics {
+        flex: 1 1 100%;
+    }
+}

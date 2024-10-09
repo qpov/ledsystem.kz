@@ -1,0 +1,148 @@
+<!-- views/admin_add_product.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить товар - Админ-панель</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Логотип -->
+                <a href="/index.html">
+                    <p>LED System Media</p>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">КОМПАНИЯ</a>
+                <a href="/catalog.html">ТОВАРЫ</a>
+                <a href="/requisites.html">КОНТАКТЫ</a>
+                <a href="/admin">АДМИН-ПАНЕЛЬ</a>
+                <a href="/admin/logout">ВЫЙТИ</a>
+            </div>
+            <div class="telephone header-telephone">
+                <div class="telephone-numbers">
+                    <p class="primary-number">+7 705 371 02 50</p>
+                    <p class="secondary-number">+7 705 444 77 03</p>
+                </div>
+                <span class="arrow">&#9660;</span> <!-- Стрелка вниз -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="add-product-container">
+
+            <!-- Всплывающие уведомления -->
+            <% if (success_msg && success_msg.length> 0) { %>
+                <div class="toast success">
+                    <%= success_msg %>
+                </div>
+                <% } %>
+
+                    <% if (error_msg && error_msg.length> 0) { %>
+                        <div class="toast error">
+                            <%= error_msg %>
+                        </div>
+                        <% } %>
+
+                            <h1>Добавить новый товар</h1>
+
+                            <% if (errors && errors.length> 0) { %>
+                                <ul class="errors">
+                                    <% errors.forEach(error=> { %>
+                                        <li>
+                                            <%= error.msg %>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                                <% } %>
+
+                                    <form action="/admin/products/add" method="POST" enctype="multipart/form-data">
+                                        <!-- Добавляем CSRF-токен -->
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                        <label for="image">Изображение:</label>
+                                        <input type="file" id="image" name="image" accept="image/*" required><br>
+
+                                        <label for="name">Название:</label>
+                                        <input type="text" id="name" name="name"
+                                            value="<%= typeof name !== 'undefined' ? name : '' %>" required><br>
+
+                                        <label for="price">Цена (₸):</label>
+                                        <input type="text" id="price" name="price"
+                                            value="<%= typeof price !== 'undefined' ? price : '' %>" required
+                                            pattern="^\d+([,.]\d{1,2})?$"
+                                            title="Введите цену, например 10 или 10,50"><br>
+
+                                        <label for="description">Описание:</label>
+                                        <textarea id="description" name="description"
+                                            required><%= typeof description !== 'undefined' ? description : '' %></textarea><br>
+
+                                        <label for="characteristics">Характеристики:</label>
+                                        <textarea id="characteristics" name="characteristics"
+                                            required><%= typeof characteristics !== 'undefined' ? characteristics : '' %></textarea><br>
+
+                                        <button type="submit" id="add-product">Добавить товар</button>
+                                    </form>
+        </div>
+    </main>
+    <footer>
+        <p id="license">&copy; 2024 ТОО «LED System Media»</p>
+        <div class="nav-links">
+            <a href="/index.html">КОМПАНИЯ</a>
+            <a href="/catalog.html">ТОВАРЫ</a>
+            <a href="/requisites.html">КОНТАКТЫ</a>
+        </div>
+        <div class="telephone footer-telephone">
+            <div class="telephone-numbers">
+                <p class="primary-number">+7 705 371 02 50</p>
+                <p class="secondary-number">+7 705 444 77 03</p>
+            </div>
+            <span class="arrow">&#9650;</span> <!-- Стрелка вверх -->
+        </div>
+    </footer>
+
+    <!-- Всплывающие уведомления и Автоматическое изменение высоты текстовых полей -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.toast');
+            toasts.forEach(toast => {
+                if (toast) {
+                    // Показать уведомление
+                    toast.classList.add('show');
+
+                    // Скрыть уведомление через 3 секунды
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
+            });
+
+            // Автоматическое изменение высоты текстовых полей
+            const autoResize = (element) => {
+                element.style.height = 'auto';
+                element.style.height = (element.scrollHeight) + 'px';
+            };
+
+            const description = document.getElementById('description');
+            const characteristics = document.getElementById('characteristics');
+
+            // Инициализация высоты при загрузке страницы
+            autoResize(description);
+            autoResize(characteristics);
+
+            // Добавление обработчиков событий
+            description.addEventListener('input', () => autoResize(description));
+            characteristics.addEventListener('input', () => autoResize(characteristics));
+        });
+    </script>
+</body>
+
+</html>

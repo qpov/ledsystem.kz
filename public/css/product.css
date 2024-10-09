@@ -1,0 +1,87 @@
+/* public/css/product.css */ 
+
+/* Определение переменных для удобства */
+:root {
+    --container-background: rgba(0,0,0,0.3); /* Фон контейнеров */
+    --text-color: white; /* Светлый текст */
+    --primary-color: rgba(0, 200, 255, 0.9);
+    --secondary-color: rgba(0, 200, 255, 0.9);
+    --accent-color: rgba(0, 200, 255, 1);
+    --neutral-color: #555555; /* Нейтральный цвет для границ */
+}
+
+/* Основные настройки */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color); /* Тёмный фон */
+    color: var(--text-color); /* Светлый текст */
+    margin: 0;
+    padding: 0;
+    background-image: url('/uploads/3.jpg'); /* Путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения для покрытия всей области */
+}
+
+/* Основной контент */
+.product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    width: max-content;
+    margin: 2rem auto;
+    background-color: var(--container-background); /* Фон контейнера */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Более тёмная тень для контраста */
+}
+
+.product-detail img {
+    max-width: 300px;
+    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.product-info {
+    width: 100%;
+}
+
+.product-info p {
+    color: var(--text-color); /* Светлый текст */
+    font-size: 1.5rem;
+}
+
+.product-description,
+.product-characteristics {
+    margin-bottom: 2rem;
+}
+
+.product-description strong,
+.product-characteristics strong {
+    display: block; /* Делает заголовок на отдельной строке */
+    font-size: 1rem;
+    color: var(--text-color); /* Светлый текст */
+}
+
+.product-description p,
+.product-characteristics p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: var(--text-color); /* Светлый текст */
+}
+
+/* Кнопка "Назад в каталог" */
+.back-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--secondary-color); /* Зелёный цвет */
+    color: black;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: var(--accent-color); /* Голубой цвет при наведении */
+}

@@ -1,0 +1,296 @@
+/* public/css/common.css */
+
+html {
+    background-color: #1b1b1b;
+    /* Тёмно-зелёный фон */
+}
+
+* {
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    /* Добавлено для упрощения управления размерами */
+}
+
+body {
+    margin: 0;
+}
+
+/* Стили для шапки */
+header {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Полупрозрачный фон для шапки */
+    position: relative;
+    /* Для обеспечения контекста позиционирования */
+    z-index: 10;
+    /* Убедитесь, что шапка выше других элементов */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 10rem;
+    /* Добавлены горизонтальные отступы */
+    height: 4rem;
+    /* Фиксированная высота */
+}
+
+.logo p {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 5rem;
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    font-size: 1rem;
+}
+
+.nav-links a:hover {
+    color: rgb(200, 200, 200);
+}
+
+/* Стили для блока телефона в шапке и футере */
+.telephone {
+    position: relative;
+    /* Для позиционирования дополнительных номеров */
+    cursor: pointer;
+    /* Изменение курсора при наведении */
+    padding: 0.5rem 1rem;
+    /* Отступы внутри блока телефона */
+    border-radius: 4px;
+    /* Скругление углов */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Плавный переход фона и тени */
+    background-color: transparent;
+    /* Исходный фон */
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    /* Центрирование по вертикали */
+    justify-content: space-between;
+    /* Распределение пространства между номерами и стрелкой */
+    height: 5rem;
+    /* Фиксированная высота, достаточная для обоих номеров */
+    overflow: hidden;
+    /* Скрыть переполнение */
+    white-space: nowrap;
+    /* Предотвращение переноса */
+    z-index: 100;
+    /* Высокий z-index, чтобы фон охватывал вторые номера */
+}
+
+.telephone-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.header-telephone .telephone-numbers {
+    /* Дополнительный номер снизу */
+    flex-direction: column;
+    /* Основной номер сверху, дополнительный снизу */
+}
+
+.footer-telephone .telephone-numbers {
+    /* Дополнительный номер сверху */
+    flex-direction: column-reverse;
+    /* Основной номер снизу, дополнительный сверху */
+}
+
+.telephone p.primary-number {
+    color: white;
+    margin: 0;
+    font-weight: bold;
+}
+
+.telephone p.secondary-number {
+    color: white;
+    margin: 0;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-10px);
+    /* Сдвиг вверх для header */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-telephone .telephone p.secondary-number {
+    transform: translateY(10px);
+    /* Сдвиг вниз для footer */
+}
+
+.telephone:hover p.secondary-number {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.telephone .arrow {
+    color: white;
+    font-size: 1rem;
+    /* Увеличен размер стрелки для лучшей видимости */
+    transition: transform 0.3s ease, color 0.3s ease;
+    margin-left: 1rem;
+    /* Отступ слева для стрелки */
+    align-self: center;
+    /* Центрирование стрелки по вертикали */
+}
+
+.header-telephone:hover .arrow {
+    transform: rotate(180deg);
+    /* Поворот стрелки вверх */
+    color: rgb(200, 200, 200);
+}
+
+.footer-telephone:hover .arrow {
+    transform: rotate(-180deg);
+    /* Поворот стрелки вниз */
+    color: rgb(200, 200, 200);
+}
+
+/* Появление дополнительного номера и объединённый фон */
+.telephone:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Объединённый фон при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Добавление тени при наведении */
+}
+
+/* Удаление лишних отступов */
+header .telephone {
+    margin-top: 2rem;
+}
+
+.header-telephone .secondary-number {
+    padding-top: 1rem;
+}
+
+header .telephone .arrow {
+    margin-top: -2rem;
+}
+
+footer .telephone {
+    margin-bottom: 2.5rem;
+}
+
+.footer-telephone .secondary-number {
+    padding-bottom: 1rem;
+}
+
+footer .telephone .arrow {
+    margin-bottom: -2rem;
+}
+
+/* Футер */
+footer {
+    display: flex;
+    color: #ffffff;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 10rem;
+    /* Добавлены горизонтальные отступы */
+    position: relative;
+    /* Для обеспечения контекста позиционирования */
+    z-index: 10;
+    /* Убедитесь, что футер выше других элементов */
+    height: 5rem;
+    /* Фиксированная высота */
+}
+
+#license {
+    color: rgb(200, 200, 200);
+}
+
+footer .nav-links {
+    display: flex;
+    gap: 5rem;
+    padding: 0;
+    margin: 0;
+}
+
+footer .nav-links a {
+    color: white;
+    font-size: 1rem;
+}
+
+footer .nav-links a:hover {
+    color: rgb(200, 200, 200);
+}
+
+/* Дополнительные стили */
+hr {
+    width: 99%;
+    border: solid gray 1px;
+}
+
+/* Медиазапросы для адаптивности */
+@media (max-width: 768px) {
+    .logo p {
+        padding-left: 2rem;
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav {
+        padding: 1rem 2rem;
+        /* Уменьшение горизонтальных отступов на мобильных */
+        height: auto;
+        /* Автоматическая высота */
+        flex-direction: column;
+        /* Стековая ориентация */
+        align-items: flex-start;
+        /* Выравнивание по левому краю */
+    }
+
+    .telephone {
+        margin-right: 0;
+        /* Удаление правого отступа */
+        width: 100%;
+        /* Ширина 100% на мобильных */
+        justify-content: space-between;
+        height: 5rem;
+        /* Фиксированная высота */
+    }
+
+    footer {
+        flex-direction: column;
+        padding: 1rem 2rem;
+        /* Уменьшение горизонтальных отступов на мобильных */
+        height: auto;
+        /* Автоматическая высота */
+    }
+
+    #license {
+        padding-left: 0;
+        margin-bottom: 1rem;
+    }
+
+    footer .nav-links {
+        gap: 2rem;
+    }
+
+    footer .telephone {
+        width: 100%;
+        /* Ширина 100% на мобильных */
+        justify-content: space-between;
+        height: 5rem;
+        /* Фиксированная высота */
+    }
+}
