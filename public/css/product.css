@@ -17,7 +17,7 @@ body {
     color: var(--text-color); /* Светлый текст */
     margin: 0;
     padding: 0;
-    background-image: url('/uploads/3.jpg'); /* Путь к вашему изображению */
+    /* background-image: url('/images/3.jpg'); */
     background-size: cover; /* Масштабирование изображения для покрытия всей области */
 }
 

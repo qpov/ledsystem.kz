@@ -2,13 +2,18 @@
 
 /* Определение переменных для удобства */
 :root {
-    --background-color: #333333; /* Основной тёмный фон */
-    --container-background: rgba(0,0,0,0.2); /* Фон контейнеров */
-    --text-color: white; /* Светлый текст */
+    --background-color: #333333;
+    /* Основной тёмный фон */
+    --container-background: rgba(0, 0, 0, 0.2);
+    /* Фон контейнеров */
+    --text-color: white;
+    /* Светлый текст */
     --primary-color: rgba(0, 200, 255, 0.9);
-    --secondary-color: #28a745; /* Зелёный вторичный цвет */
+    --secondary-color: #28a745;
+    /* Зелёный вторичный цвет */
     --accent-color: rgba(0, 200, 255, 1);
-    --neutral-color: #555555; /* Нейтральный цвет для границ */
+    --neutral-color: #555555;
+    /* Нейтральный цвет для границ */
 }
 
 .admin-dashboard {
@@ -21,12 +26,13 @@
 .add-product-container,
 .edit-product-container,
 .change-password-container {
-    max-width: 600px;
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: var(--container-background); /* Фон контейнеров */
+    background-color: var(--container-background);
+    /* Фон контейнеров */
     color: var(--text-color);
+    text-align: center;
 }
 
 /* Заголовки */
@@ -34,14 +40,16 @@ h1,
 h2 {
     text-align: center;
     margin-bottom: 1rem;
-    color: var(--text-color); /* Светлый текст */
+    color: var(--text-color);
+    /* Светлый текст */
 }
 
 /* Метки форм */
 form label {
     display: block;
     margin-top: 0.5rem;
-    color: var(--text-color); /* Светлый текст */
+    color: var(--text-color);
+    /* Светлый текст */
 }
 
 /* Поля ввода */
@@ -50,21 +58,27 @@ form input[type="password"],
 form input[type="number"],
 form textarea,
 form input[type="file"] {
-    width: 100%;
+    width: 25%;
     padding: 0.5rem;
     margin-top: 0.25rem;
     box-sizing: border-box;
-    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border: 1px solid var(--neutral-color);
+    /* Нейтральный цвет для границ */
     border-radius: 4px;
-    resize: none; /* Отключает ручное изменение размера */
-    overflow: hidden; /* Скрывает полосу прокрутки */
-    background-color: #555555; /* Более тёмный фон полей ввода */
-    color: var(--text-color); /* Светлый текст */
+    resize: none;
+    /* Отключает ручное изменение размера */
+    overflow: hidden;
+    /* Скрывает полосу прокрутки */
+    background-color: #555555;
+    /* Более тёмный фон полей ввода */
+    color: var(--text-color);
+    /* Светлый текст */
 }
 
 /* Текстовые области */
 textarea {
-    min-height: 100px; /* Минимальная высота текстовых полей */
+    min-height: 100px;
+    /* Минимальная высота текстовых полей */
 }
 
 /* Кнопки */
@@ -73,8 +87,10 @@ textarea {
 .edit-button,
 .delete-button,
 .button {
-    background-color: var(--primary-color); /* Основной цвет */
-    color: black; /* Белый текст */
+    background-color: var(--primary-color);
+    /* Основной цвет */
+    color: black;
+    /* Белый текст */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -97,7 +113,8 @@ textarea {
 .edit-button:hover,
 .delete-button:hover,
 .button:hover {
-    background-color: var(--accent-color); /* Акцентный цвет при наведении */
+    background-color: var(--accent-color);
+    /* Акцентный цвет при наведении */
 }
 
 /* Ошибки и успех */
@@ -105,16 +122,19 @@ textarea {
     list-style-type: none;
     padding: 0;
     margin-bottom: 1rem;
-    color: #dc3545; /* Красный цвет для ошибок */
+    color: #dc3545;
+    /* Красный цвет для ошибок */
 }
 
 .error {
-    color: #dc3545; /* Красный цвет */
+    color: #dc3545;
+    /* Красный цвет */
     margin-bottom: 1rem;
 }
 
 .success {
-    color: var(--secondary-color); /* Зелёный цвет */
+    color: var(--secondary-color);
+    /* Зелёный цвет */
     margin-bottom: 1rem;
 }
 
@@ -128,21 +148,24 @@ table {
 table,
 th,
 td {
-    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border: 1px solid var(--neutral-color);
+    /* Нейтральный цвет для границ */
 }
 
 th,
 td {
     padding: 0.75rem;
     text-align: left;
-    color: var(--text-color); /* Светлый текст в таблицах */
+    color: var(--text-color);
+    /* Светлый текст в таблицах */
 }
 
 /* Изображение */
 .current-image {
     max-width: 150px;
     margin-top: 0.5rem;
-    border: 1px solid var(--neutral-color); /* Нейтральный цвет для границ */
+    border: 1px solid var(--neutral-color);
+    /* Нейтральный цвет для границ */
     border-radius: 4px;
 }
 
@@ -154,21 +177,25 @@ td {
     transform: translateX(-50%);
     padding: 1rem 2rem;
     border-radius: 5px;
-    color: #ffffff; /* Белый текст */
+    color: #ffffff;
+    /* Белый текст */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s;
     z-index: 1000;
     font-size: 1rem;
-    cursor: pointer; /* Курсор указателя для интерактивности */
+    cursor: pointer;
+    /* Курсор указателя для интерактивности */
 }
 
 .toast.success {
-    background-color: var(--secondary-color); /* Зелёный для успеха */
+    background-color: var(--secondary-color);
+    /* Зелёный для успеха */
 }
 
 .toast.error {
-    background-color: #dc3545; /* Красный для ошибок */
+    background-color: #dc3545;
+    /* Красный для ошибок */
 }
 
 .toast.show {
@@ -178,8 +205,10 @@ td {
 
 /* Добавляем стили для кнопок внутри карточек, если есть */
 .product-card .button {
-    background-color: var(--primary-color); /* Основной цвет */
-    color: #ffffff; /* Белый текст */
+    background-color: var(--primary-color);
+    /* Основной цвет */
+    color: #ffffff;
+    /* Белый текст */
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
@@ -189,12 +218,13 @@ td {
 }
 
 .product-card .button:hover {
-    background-color: var(--accent-color); /* Акцентный цвет при наведении */
+    background-color: var(--accent-color);
+    /* Акцентный цвет при наведении */
 }
 
 .form-login-button {
     margin-top: 1rem;
-    width: 100%;
+    width: max-content;
     color: black;
     font-weight: bold;
 }
@@ -211,4 +241,41 @@ td {
 
 #add-product:hover {
     background-color: rgba(0, 200, 255, 1);
+}
+
+.admin-dashboard {
+    text-align: center;
+    padding: 2rem;
+}
+
+.admin-dashboard h1 {
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.admin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.admin-buttons .button {
+    width: 30rem;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    text-wrap: nowrap;
+}
+
+.admin-buttons .button:hover {
+    background-color: var(--accent-color);
+}
+
+.back {
+    margin-top: 1.5rem;
 }

@@ -1,0 +1,24 @@
+<!-- views/admin/dashboard.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель - Главная</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="admin-dashboard">
+            <div class="admin-buttons">
+                <a href="/admin/products" class="button">Управление товарами</a>
+                <a href="/admin/" class="button">Управление пользователями (В процессе)</a>
+                <a href="/admin/" class="button">Настройка сайта (В процессе)</a>
+            </div>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

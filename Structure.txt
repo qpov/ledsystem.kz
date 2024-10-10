@@ -1,0 +1,22 @@
+ledsystem.kz/
+├── views/
+│   ├── admin_dashboard.ejs
+│   ├── admin_add_product.ejs
+│   ├── admin_change_password.ejs
+│   ├── admin_edit_product.ejs
+│   ├── admin_login.ejs
+│   ├── product.ejs 
+└── public/
+    ├── css/
+    │   ├── catalog.css
+    │   ├── product.css
+    │   ├── common.css
+    │   ├── admin.css
+    │   ├── index.css
+    │   └── requisites.css
+    ├── js/
+    │   ├── catalog.js
+    │   └── index.js
+    ├── catalog.html
+    ├── index.html
+    └── requisites.html

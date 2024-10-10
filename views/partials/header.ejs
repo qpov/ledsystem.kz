@@ -1,0 +1,28 @@
+<header>
+    <nav>
+        <div class="logo">
+            <!-- Логотип -->
+            <a href="/index.html">
+                <p>LED SYSTEM PRODUCTION</p>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">КОМПАНИЯ</a>
+            <a href="/catalog.html">ТОВАРЫ</a>
+            <a href="/requisites.html">КОНТАКТЫ</a>
+            <% if (user && user.isAdmin) { %>
+                <a href="/admin">АДМИН-ПАНЕЛЬ</a>
+                <a href="/admin/logout">ВЫЙТИ</a>
+            <% } else { %>
+                <a href="/admin/login">ВХОД</a>
+            <% } %>
+        </div>
+        <div class="telephone header-telephone">
+            <div class="telephone-numbers">
+                <p class="primary-number">+7 705 371 02 50</p>
+                <p class="secondary-number">+7 705 444 77 03</p>
+            </div>
+            <span class="arrow">&#9660;</span> <!-- Стрелка вниз -->
+        </div>
+    </nav>
+</header>

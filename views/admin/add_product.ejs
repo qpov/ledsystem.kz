@@ -1,0 +1,61 @@
+<!-- views/admin/add_product.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить Товар - Админ-панель</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="admin-dashboard">
+            <h1>Добавить Новый Товар</h1>
+
+            <% if (error_msg && error_msg.length > 0) { %>
+                <ul class="errors">
+                    <% error_msg.forEach(error => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <% if (errors && errors.length > 0) { %>
+                <ul class="errors">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <form action="/admin/products/add" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <label for="name">Название Товара:</label>
+                <input type="text" id="name" name="name" value="<%= name %>" required>
+
+                <label for="price">Цена (₸):</label>
+                <input type="text" id="price" name="price" value="<%= price %>" required>
+
+                <label for="image">Изображение:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
+                <label for="description">Описание:</label>
+                <textarea id="description" name="description" rows="5" required><%= description %></textarea>
+
+                <label for="characteristics">Характеристики:</label>
+                <textarea id="characteristics" name="characteristics" rows="5" required><%= characteristics %></textarea>
+                <div>
+                    <button type="submit" class="form-login-button">Добавить Товар</button>
+                </div>
+            </form>
+            <div class="back">
+                <a href="/admin/products" class="button">Вернуться назад</a>
+            </div>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

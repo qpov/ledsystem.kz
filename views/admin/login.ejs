@@ -1,0 +1,49 @@
+<!-- views/admin/login.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в Админ-панель</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="login-container">
+            <h1>Вход в Админ-панель</h1>
+            <% if (loggedOut) { %>
+                <p class="success">Вы успешно вышли из системы.</p>
+            <% } %>
+            <% if (error_msg && error_msg.length > 0) { %>
+                <ul class="errors">
+                    <% error_msg.forEach(error => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+            <% if (errors && errors.length > 0) { %>
+                <ul class="errors">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+            <form action="/admin/login" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <label for="username">Имя пользователя:</label>
+                <input type="text" id="username" name="username" value="<%= username %>" required>
+
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+                <div>
+                    <button type="submit" class="form-login-button">Войти</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

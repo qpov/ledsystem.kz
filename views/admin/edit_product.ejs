@@ -1,0 +1,64 @@
+<!-- views/admin/edit_product.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать Товар - Админ-панель</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="edit-product-container">
+            <h1>Редактировать Товар</h1>
+            <% if (error_msg && error_msg.length > 0) { %>
+                <ul class="errors">
+                    <% error_msg.forEach(error => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+            <% if (errors && errors.length > 0) { %>
+                <ul class="errors">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+            <form action="/admin/products/edit/<%= product.id %>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <label for="name">Название:</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>" required>
+
+                <label for="price">Цена (₸):</label>
+                <input type="number" id="price" name="price" value="<%= product.price %>" required>
+
+                <label for="image">Изображение:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <% if (product.image) { %>
+                    <p>Текущее изображение:</p>
+                    <img src="/uploads/<%= product.image %>" alt="<%= product.name %>" style="max-width: 200px;">
+                <% } %>
+
+                <label for="description">Описание:</label>
+                <textarea id="description" name="description" rows="5" required><%= product.description %></textarea>
+
+                <label for="characteristics">Характеристики:</label>
+                <textarea id="characteristics" name="characteristics" rows="5" required><%= product.characteristics %></textarea>
+
+                <div>
+                    <button type="submit" class="form-login-button">Сохранить Изменения</button>
+                </div>            
+            </form>
+            <div class="back">
+                <a href="/admin/products" class="button">Вернуться назад</a>
+            </div>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+    <script src="/js/custom.js"></script>
+</body>
+</html>

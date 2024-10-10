@@ -1,0 +1,54 @@
+<!-- views/admin/site_settings.ejs -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель - Настройка сайта</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="admin-dashboard">
+
+            <!-- Всплывающие уведомления -->
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="toast success">
+                    <%= success_msg %>
+                </div>
+            <% } %>
+
+            <% if (error_msg && error_msg.length > 0) { %>
+                <div class="toast error">
+                    <%= error_msg %>
+                </div>
+            <% } %>
+
+            <div class="manage-buttons">
+                <a href="/admin" class="button">Вернуться на главную</a>
+            </div>
+
+            <div class="site-settings">
+                <h2>Настройки сайта</h2>
+                <!-- Здесь разместите формы и настройки для редактирования сайта -->
+                <form action="/admin/settings/update" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                    <label for="site_title">Заголовок сайта:</label>
+                    <input type="text" id="site_title" name="site_title" value="<%= settings.site_title %>" required>
+
+                    <label for="site_description">Описание сайта:</label>
+                    <textarea id="site_description" name="site_description" required><%= settings.site_description %></textarea>
+
+                    <!-- Добавьте другие поля настроек по необходимости -->
+
+                    <button type="submit" class="form-login-button">Сохранить Изменения</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>
