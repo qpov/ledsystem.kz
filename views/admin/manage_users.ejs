@@ -4,7 +4,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Админ-панель - Управление пользователями</title>
+    <title>Админ-панель - Управление администраторами</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin.css">
 </head>
@@ -27,7 +27,7 @@
             <% } %>
 
             <div class="manage-buttons">
-                <a href="/admin/users/add" class="add-button">Добавить нового пользователя</a>
+                <a href="/admin/users/add" class="add-button">Добавить нового администратора</a>
                 <a href="/admin" class="button">Вернуться на главную</a>
             </div>
 
@@ -35,8 +35,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Имя</th>
-                        <th>Email</th>
+                        <th>Имя пользователя</th>
                         <th>Роль</th>
                         <th>Действия</th>
                     </tr>
@@ -45,16 +44,19 @@
                     <% users.forEach(user => { %>
                         <tr>
                             <td><%= user.id %></td>
-                            <td><%= user.name %></td>
-                            <td><%= user.email %></td>
-                            <td><%= user.role %></td>
+                            <td><%= user.username %></td>
+                            <td><%= user.role === 'superadmin' ? 'Суперадмин' : 'Админ' %></td>
                             <td>
-                                <a href="/admin/users/edit/<%= user.id %>" class="edit-button">Редактировать</a>
-                                <form action="/admin/users/delete/<%= user.id %>" method="POST" style="display:inline;">
-                                    <!-- Добавляем CSRF-токен -->
-                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                    <button type="submit" class="delete-button confirm-delete" data-message="Вы уверены, что хотите удалить этого пользователя?">Удалить</button>
-                                </form>
+                                <% if (user.role !== 'superadmin') { %>
+                                    <a href="/admin/users/edit/<%= user.id %>" class="edit-button">Редактировать</a>
+                                    <form action="/admin/users/delete/<%= user.id %>" method="POST" style="display:inline;">
+                                        <!-- Добавляем CSRF-токен -->
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <button type="submit" class="delete-button confirm-delete" data-message="Вы уверены, что хотите удалить этого администратора?">Удалить</button>
+                                    </form>
+                                <% } else { %>
+                                    <span class="badge superadmin">Нельзя удалить</span>
+                                <% } %>
                             </td>
                         </tr>
                     <% }) %>

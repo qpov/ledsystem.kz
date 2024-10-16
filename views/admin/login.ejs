@@ -11,18 +11,21 @@
 <body>
     <%- include('../partials/header') %>
     <main>
-        <div class="login-container">
+        <div class="admin-dashboard">
             <h1>Вход в Админ-панель</h1>
+
             <% if (loggedOut) { %>
-                <p class="success">Вы успешно вышли из системы.</p>
+                <div class="toast success">
+                    Вы успешно вышли из системы.
+                </div>
             <% } %>
+
             <% if (error_msg && error_msg.length > 0) { %>
-                <ul class="errors">
-                    <% error_msg.forEach(error => { %>
-                        <li><%= error %></li>
-                    <% }) %>
-                </ul>
+                <div class="toast error">
+                    <%= error_msg %>
+                </div>
             <% } %>
+
             <% if (errors && errors.length > 0) { %>
                 <ul class="errors">
                     <% errors.forEach(error => { %>
@@ -30,17 +33,17 @@
                     <% }) %>
                 </ul>
             <% } %>
+
             <form action="/admin/login" method="POST">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                
+
                 <label for="username">Имя пользователя:</label>
                 <input type="text" id="username" name="username" value="<%= username %>" required>
 
                 <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" required>
-                <div>
-                    <button type="submit" class="form-login-button">Войти</button>
-                </div>
+
+                <button type="submit" class="form-login-button">Войти</button>
             </form>
         </div>
     </main>

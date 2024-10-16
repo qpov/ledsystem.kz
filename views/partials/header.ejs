@@ -1,3 +1,5 @@
+<!-- views/partials/header.ejs -->
+
 <header>
     <nav>
         <div class="logo">
@@ -13,6 +15,7 @@
             <% if (user && user.isAdmin) { %>
                 <a href="/admin">АДМИН-ПАНЕЛЬ</a>
                 <a href="/admin/logout">ВЫЙТИ</a>
+                <span class="admin-role">(<%= user.role === 'superadmin' ? 'Суперадмин' : 'Админ' %>)</span>
             <% } else { %>
                 <a href="/admin/login">ВХОД</a>
             <% } %>

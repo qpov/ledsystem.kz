@@ -12,13 +12,27 @@
     <%- include('../partials/header') %>
     <main>
         <div class="admin-dashboard">
+            <!-- Всплывающие уведомления -->
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="toast success">
+                    <%= success_msg %>
+                </div>
+            <% } %>
+
+            <% if (error_msg && error_msg.length > 0) { %>
+                <div class="toast error">
+                    <%= error_msg %>
+                </div>
+            <% } %>
+
             <div class="admin-buttons">
                 <a href="/admin/products" class="button">Управление товарами</a>
-                <a href="/admin/" class="button">Управление пользователями (В процессе)</a>
-                <a href="/admin/" class="button">Настройка сайта (В процессе)</a>
+                <a href="/admin/users" class="button">Управление пользователями</a>
+                <a href="#" class="button disabled" title="В разработке">Настройка сайта</a>
             </div>
         </div>
     </main>
     <%- include('../partials/footer') %>
+    <script src="/js/custom.js"></script>
 </body>
 </html>

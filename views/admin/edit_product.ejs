@@ -11,15 +11,15 @@
 <body>
     <%- include('../partials/header') %>
     <main>
-        <div class="edit-product-container">
+        <div class="admin-dashboard">
             <h1>Редактировать Товар</h1>
+
             <% if (error_msg && error_msg.length > 0) { %>
-                <ul class="errors">
-                    <% error_msg.forEach(error => { %>
-                        <li><%= error %></li>
-                    <% }) %>
-                </ul>
+                <div class="toast error">
+                    <%= error_msg %>
+                </div>
             <% } %>
+
             <% if (errors && errors.length > 0) { %>
                 <ul class="errors">
                     <% errors.forEach(error => { %>
@@ -27,38 +27,35 @@
                     <% }) %>
                 </ul>
             <% } %>
+
             <form action="/admin/products/edit/<%= product.id %>" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <!-- Скрытое поле для передачи текущего изображения -->
+                <input type="hidden" name="current_image" value="<%= product.image %>">
 
                 <label for="name">Название:</label>
                 <input type="text" id="name" name="name" value="<%= product.name %>" required>
 
-                <label for="price">Цена (₸):</label>
-                <input type="number" id="price" name="price" value="<%= product.price %>" required>
-
-                <label for="image">Изображение:</label>
-                <input type="file" id="image" name="image" accept="image/*">
-                <% if (product.image) { %>
-                    <p>Текущее изображение:</p>
-                    <img src="/uploads/<%= product.image %>" alt="<%= product.name %>" style="max-width: 200px;">
-                <% } %>
+                <label for="price">Цена:</label>
+                <input type="text" id="price" name="price" value="<%= product.price %>" required>
 
                 <label for="description">Описание:</label>
-                <textarea id="description" name="description" rows="5" required><%= product.description %></textarea>
+                <textarea id="description" name="description" required><%= product.description %></textarea>
 
                 <label for="characteristics">Характеристики:</label>
-                <textarea id="characteristics" name="characteristics" rows="5" required><%= product.characteristics %></textarea>
+                <textarea id="characteristics" name="characteristics" required><%= product.characteristics %></textarea>
 
-                <div>
+                <label for="image">Изображение (оставьте пустым, чтобы сохранить текущее):</label>
+                <input type="file" id="image" name="image" accept="image/*">
+
+                <!-- Контейнер для кнопок -->
+                <div class="form-buttons">
                     <button type="submit" class="form-login-button">Сохранить Изменения</button>
-                </div>            
+                    <a href="/admin/products" class="button">Вернуться назад</a>
+                </div>
             </form>
-            <div class="back">
-                <a href="/admin/products" class="button">Вернуться назад</a>
-            </div>
         </div>
     </main>
     <%- include('../partials/footer') %>
-    <script src="/js/custom.js"></script>
 </body>
 </html>

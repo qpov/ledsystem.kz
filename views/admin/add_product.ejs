@@ -15,11 +15,9 @@
             <h1>Добавить Новый Товар</h1>
 
             <% if (error_msg && error_msg.length > 0) { %>
-                <ul class="errors">
-                    <% error_msg.forEach(error => { %>
-                        <li><%= error %></li>
-                    <% }) %>
-                </ul>
+                <div class="toast error">
+                    <%= error_msg %>
+                </div>
             <% } %>
 
             <% if (errors && errors.length > 0) { %>
@@ -33,27 +31,27 @@
             <form action="/admin/products/add" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-                <label for="name">Название Товара:</label>
+                <label for="name">Название:</label>
                 <input type="text" id="name" name="name" value="<%= name %>" required>
 
-                <label for="price">Цена (₸):</label>
+                <label for="price">Цена:</label>
                 <input type="text" id="price" name="price" value="<%= price %>" required>
+
+                <label for="description">Описание:</label>
+                <textarea id="description" name="description" required><%= description %></textarea>
+
+                <label for="characteristics">Характеристики:</label>
+                <textarea id="characteristics" name="characteristics" required><%= characteristics %></textarea>
 
                 <label for="image">Изображение:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
 
-                <label for="description">Описание:</label>
-                <textarea id="description" name="description" rows="5" required><%= description %></textarea>
-
-                <label for="characteristics">Характеристики:</label>
-                <textarea id="characteristics" name="characteristics" rows="5" required><%= characteristics %></textarea>
-                <div>
+                <!-- Контейнер для кнопок -->
+                <div class="form-buttons">
                     <button type="submit" class="form-login-button">Добавить Товар</button>
+                    <a href="/admin/products" class="button">Вернуться назад</a>
                 </div>
             </form>
-            <div class="back">
-                <a href="/admin/products" class="button">Вернуться назад</a>
-            </div>
         </div>
     </main>
     <%- include('../partials/footer') %>

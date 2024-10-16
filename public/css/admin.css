@@ -279,3 +279,19 @@ td {
 .back {
     margin-top: 1.5rem;
 }
+
+/* public/css/admin.css */
+
+.button.disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* public/css/admin.css */
+
+.admin-role {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #ffc107; /* Желтый цвет для выделения */
+}
