@@ -40,41 +40,53 @@
 
     <main>
         <div class="product-detail">
-            <img src="/uploads/<%= product.image %>" alt="<%= product.name %>">
-            <div class="product-info">
-                <p class="product-name">
-                    <%= product.name %>
-                </p>
-                <p class="product-price">Цена: <%= displayPrice %> ₸</p>
-
-                <div class="product-description">
-                    Описание:
-                    <% // Разделение описания на абзацы по символам новой строки (\n или \r\n) const
-                        paragraphs=product.description.split(/\r?\n/); paragraphs.forEach(paragraph=> {
-                        if (paragraph.trim() !== '') {
-                        %>
-                        <p>
-                            <%= paragraph.trim() %>
-                        </p>
-                        <% } }); %>
+            <!-- Основная информация: изображение, название и цена -->
+            <div class="product-main-info">
+                <div class="product-image">
+                    <img src="/uploads/<%= product.image %>" alt="<%= product.name %>">
                 </div>
-
-                <div class="product-characteristics">
-                    Характеристики:
-                    <% // Разделение характеристик на абзацы по символам новой строки (\n или \r\n) const
-                        characteristics=product.characteristics.split(/\r?\n/); characteristics.forEach(characteristic=>
-                        {
-                        if (characteristic.trim() !== '') {
-                        %>
-                        <p>
-                            <%= characteristic.trim() %>
-                        </p>
-                        <% } }); %>
+                <div class="product-info">
+                    <h1 class="product-name"><%= product.name %></h1>
+                    <p class="product-price">Цена: <%= displayPrice %> ₸</p>
                 </div>
-
-                <!-- Кнопка "Назад в каталог" -->
-                <a href="/catalog.html" class="back-button">← Назад в каталог</a>
             </div>
+
+            <!-- Описание товара -->
+            <div class="product-description">
+                <strong>Описание:</strong>
+                <% 
+                    const paragraphs = product.description.split(/\r?\n/); 
+                    paragraphs.forEach(paragraph => {
+                        if (paragraph.trim() !== '') {
+                %>
+                    <p>
+                        <%= paragraph.trim() %>
+                    </p>
+                <% 
+                        } 
+                    }); 
+                %>
+            </div>
+
+            <!-- Характеристики товара -->
+            <div class="product-characteristics">
+                <strong>Характеристики:</strong>
+                <% 
+                    const characteristics = product.characteristics.split(/\r?\n/); 
+                    characteristics.forEach(characteristic => {
+                        if (characteristic.trim() !== '') {
+                %>
+                    <p>
+                        <%= characteristic.trim() %>
+                    </p>
+                <% 
+                        } 
+                    }); 
+                %>
+            </div>
+
+            <!-- Кнопка "Назад в каталог" -->
+            <a href="/catalog.html" class="back-button">← Назад в каталог</a>
         </div>
     </main>
     <footer>

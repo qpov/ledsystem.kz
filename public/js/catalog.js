@@ -47,26 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             price.innerHTML = `<strong>Цена:</strong> ${formattedPrice} ₸`;
             productCard.appendChild(price);
 
-            // Описание товара с заголовком "Описание" и поддержкой абзацев
-            const descriptionContainer = document.createElement('div');
-            descriptionContainer.classList.add('description-container');
-
-            const descriptionLabel = document.createElement('strong');
-            descriptionLabel.textContent = 'Описание:';
-            descriptionContainer.appendChild(descriptionLabel);
-
-            // Разделение описания на абзацы по символам новой строки (\n или \r\n)
-            const paragraphs = product.description.split(/\r?\n/);
-            paragraphs.forEach(paragraph => {
-                if (paragraph.trim() !== '') { // Проверяем, что абзац не пустой
-                    const p = document.createElement('p');
-                    p.textContent = paragraph.trim();
-                    descriptionContainer.appendChild(p);
-                }
-            });
-
-            productCard.appendChild(descriptionContainer);
-
             // Добавление карточки товара в список
             productList.appendChild(productCard);
         });
