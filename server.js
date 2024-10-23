@@ -88,9 +88,9 @@ let pool;
         pool = mariadb.createPool({
             host: process.env.DB_HOST || 'localhost',
             port: process.env.DB_PORT || 3306,
-            user: process.env.DB_USER || 'your_db_user',
-            password: process.env.DB_PASSWORD || 'your_db_password',
-            database: process.env.DB_NAME || 'your_db_name',
+            user: process.env.DB_USER || 'p-344906_site',
+            password: process.env.DB_PASSWORD || '%5yP604cj',
+            database: process.env.DB_NAME || 'p-344906_site',
             connectionLimit: 5,
             charset: 'utf8mb4', // Установить charset
             bigIntAsNumber: true // Добавлено для обработки BIGINT как Number
