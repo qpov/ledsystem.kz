@@ -44,18 +44,19 @@ app.use(helmet({
     // Другие настройки Helmet по необходимости
 }));
 
-// Middleware для отключения кэширования
+// Заголовки для предотвращения кеширования
 app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.setHeader('Surrogate-Control', 'no-store');
+    res.header('Cache-Control', 'no-store');
     next();
 });
 
 // Парсинг JSON и URL-encoded данных
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Статические файлы
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Настройка express-session
 app.use(session({
@@ -79,51 +80,6 @@ app.use((req, res, next) => {
     res.locals.user = req.session.user || null;
     next();
 });
-
-// Статические файлы с настройкой отключения кэширования
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
-    etag: false,
-    maxAge: 0,
-    setHeaders: (res, path) => {
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-        res.setHeader('Surrogate-Control', 'no-store');
-    }
-}));
-
-app.use('/css', express.static(path.join(__dirname, 'public/css'), {
-    etag: false,
-    maxAge: 0,
-    setHeaders: (res, path) => {
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-        res.setHeader('Surrogate-Control', 'no-store');
-    }
-}));
-
-app.use('/js', express.static(path.join(__dirname, 'public/js'), {
-    etag: false,
-    maxAge: 0,
-    setHeaders: (res, path) => {
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-        res.setHeader('Surrogate-Control', 'no-store');
-    }
-}));
-
-app.use(express.static(path.join(__dirname, 'public'), {
-    etag: false,
-    maxAge: 0,
-    setHeaders: (res, path) => {
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-        res.setHeader('Surrogate-Control', 'no-store');
-    }
-}));
 
 // --------------------- Подключение к БД ----------------------
 let pool;
@@ -259,4 +215,7 @@ app.listen(PORT, () => {
 });
 
 // --------------------- Установка Переменной Версии ----------------------------
-app.locals.assetVersion = '1.0.2';
+const crypto = require('crypto');
+
+// Генерация уникального хеша при запуске сервера
+app.locals.assetVersion = crypto.randomBytes(8).toString('hex');
