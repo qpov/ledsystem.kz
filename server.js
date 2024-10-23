@@ -80,8 +80,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware для отключения кэширования должен быть до express.static
-
 // Статические файлы с настройкой отключения кэширования
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
     etag: false,
@@ -116,7 +114,6 @@ app.use('/js', express.static(path.join(__dirname, 'public/js'), {
     }
 }));
 
-// Обслуживание остальных статических файлов без кэширования
 app.use(express.static(path.join(__dirname, 'public'), {
     etag: false,
     maxAge: 0,
@@ -260,3 +257,6 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
+
+// --------------------- Установка Переменной Версии ----------------------------
+app.locals.assetVersion = '1.0.2';
