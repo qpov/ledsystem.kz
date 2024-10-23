@@ -2,17 +2,14 @@
 
 const express = require('express');
 const mariadb = require('mariadb');
-const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const ejs = require('ejs');
-const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('connect-flash');
-const { body, validationResult } = require('express-validator');
 const csrf = require('csurf');
-const fs = require('fs').promises;
 const helmet = require('helmet');
+const crypto = require('crypto'); // Для генерации assetVersion
 require('dotenv').config();
 
 const app = express();
@@ -32,38 +29,27 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'"], // Разрешаем скрипты только с самого сайта
-            styleSrc: ["'self'", "'unsafe-inline'"], // Разрешаем стили с самого сайта и inline-стили
-            imgSrc: ["'self'", "data:"], // Разрешаем изображения с самого сайта и data URIs
+            scriptSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:"],
             connectSrc: ["'self'"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             objectSrc: ["'none'"],
             upgradeInsecureRequests: [],
         }
     },
-    // Другие настройки Helmet по необходимости
 }));
-
-// Заголовки для предотвращения кеширования
-app.use((req, res, next) => {
-    res.header('Cache-Control', 'no-store');
-    next();
-});
 
 // Парсинг JSON и URL-encoded данных
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Статические файлы
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Настройка express-session
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your_secret_key', // Замените на надёжный секрет в .env
+    secret: process.env.SESSION_SECRET || 'your_secret_key',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // Установите `true` при использовании HTTPS
+    cookie: { secure: false }
 }));
 
 // Настройка connect-flash
@@ -81,6 +67,12 @@ app.use((req, res, next) => {
     next();
 });
 
+// --------------------- Установка Переменной Версии ----------------------------
+// Генерация уникального хеша при запуске сервера
+app.locals.assetVersion = crypto.randomBytes(8).toString('hex');
+// Альтернативный вариант: использование timestamp
+// app.locals.assetVersion = Date.now();
+
 // --------------------- Подключение к БД ----------------------
 let pool;
 (async () => {
@@ -92,10 +84,9 @@ let pool;
             password: process.env.DB_PASSWORD || '%5yP604cj',
             database: process.env.DB_NAME || 'p-344906_site',
             connectionLimit: 5,
-            charset: 'utf8mb4', // Установить charset
-            bigIntAsNumber: true // Добавлено для обработки BIGINT как Number
+            charset: 'utf8mb4',
+            bigIntAsNumber: true
         });
-        // Тестирование соединения
         const conn = await pool.getConnection();
         console.log('Подключено к базе данных MariaDB');
         conn.release();
@@ -111,16 +102,47 @@ app.use((req, res, next) => {
     next();
 });
 
+// --------------------- Статические Файлы с Настройкой Кэширования ----------------------------
+
+// Функция для установки заголовков кэширования
+const setNoCacheHeaders = (res, path) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+};
+
+// Обслуживание статических файлов с отключением кэширования
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+    etag: false,
+    maxAge: 0,
+    setHeaders: setNoCacheHeaders
+}));
+
+app.use('/css', express.static(path.join(__dirname, 'public/css'), {
+    etag: false,
+    maxAge: 0,
+    setHeaders: setNoCacheHeaders
+}));
+
+app.use('/js', express.static(path.join(__dirname, 'public/js'), {
+    etag: false,
+    maxAge: 0,
+    setHeaders: setNoCacheHeaders
+}));
+
+app.use(express.static(path.join(__dirname, 'public'), {
+    etag: false,
+    maxAge: 0,
+    setHeaders: setNoCacheHeaders
+}));
+
 // --------------------- Подключение Маршрутов ----------------------
 const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
 
 // --------------------- API Маршруты ----------------------------
 
-/**
- * GET /api/products?page=1&limit=12
- * Возвращает список продуктов с пагинацией
- */
 app.get('/api/products', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 12;
@@ -143,10 +165,6 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-/**
- * GET /api/products/:id
- * Возвращает информацию о конкретном продукте
- */
 app.get('/api/products/:id', async (req, res) => {
     const productId = req.params.id;
 
@@ -166,16 +184,10 @@ app.get('/api/products/:id', async (req, res) => {
 
 // --------------------- Публичные Маршруты ----------------------------
 
-/**
- * Главная страница перенаправляет на каталог
- */
 app.get('/', (req, res) => {
     res.redirect('/catalog.html');
 });
 
-/**
- * Отображение отдельного товара через EJS
- */
 app.get('/product/:id', async (req, res) => {
     try {
         const productId = req.params.id;
@@ -198,14 +210,11 @@ app.get('/product/:id', async (req, res) => {
 
 // --------------------- Обработчик Ошибок ----------------------------
 
-// Этот обработчик ошибок перехватывает все необработанные ошибки
-// и отправляет подробную информацию об ошибках на клиентскую сторону
-// Только для отладки. Удалите или закомментируйте этот код в продакшн-среде
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err.stack);
     res.status(500).json({ 
         error: 'Внутренняя ошибка сервера',
-        details: err.message // Отправляем подробности ошибки
+        details: err.message
     });
 });
 
@@ -213,9 +222,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
-
-// --------------------- Установка Переменной Версии ----------------------------
-const crypto = require('crypto');
-
-// Генерация уникального хеша при запуске сервера
-app.locals.assetVersion = crypto.randomBytes(8).toString('hex');
