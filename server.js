@@ -81,6 +81,36 @@ app.use((req, res, next) => {
     next();
 });
 
+// Middleware для отключения кэширования
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+    next();
+});
+
+// Статические файлы
+app.use('/css', express.static(path.join(__dirname, 'public/css'), {
+    etag: false,
+    maxAge: '0'
+}));
+
+app.use('/js', express.static(path.join(__dirname, 'public/js'), {
+    etag: false,
+    maxAge: '0'
+}));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+    etag: false,
+    maxAge: '0'
+}));
+
+app.use(express.static(path.join(__dirname, 'public'), {
+    etag: false,
+    maxAge: '0'
+}));
+
 // --------------------- Подключение к БД ----------------------
 let pool;
 (async () => {
