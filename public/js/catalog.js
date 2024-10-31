@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             productCard.appendChild(name);
 
             // Цена товара с запятой
-            const price = document.createElement('p');
+            // const price = document.createElement('p');
             // Форматирование цены с запятой
-            const formattedPrice = parseFloat(product.price).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-            price.innerHTML = `<strong>Цена:</strong> ${formattedPrice} ₸`;
-            productCard.appendChild(price);
+            // const formattedPrice = parseFloat(product.price).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            // price.innerHTML = `<strong>Цена:</strong> ${formattedPrice} ₸`;
+            // productCard.appendChild(price);
 
             // Добавление карточки товара в список
             productList.appendChild(productCard);
