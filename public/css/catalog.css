@@ -52,7 +52,7 @@ main {
 /* Изображение продукта */
 .product-card img {
     max-width: 100%;
-    height: auto;
+    height: 4rem;
     border-radius: 4px;
     margin-bottom: 1rem;
 }
