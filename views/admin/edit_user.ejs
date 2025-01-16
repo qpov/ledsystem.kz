@@ -2,50 +2,58 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Редактировать Администратора - Админ-панель</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin.css">
 </head>
+
 <body>
     <%- include('../partials/header') %>
-    <main>
-        <div class="admin-dashboard">
-            <h1>Редактировать Администратора</h1>
+        <main>
+            <div class="admin-dashboard">
+                <h1>Редактировать Администратора</h1>
 
-            <% if (error_msg && error_msg.length > 0) { %>
-                <div class="toast error">
-                    <%= error_msg %>
-                </div>
-            <% } %>
+                <% if (error_msg && error_msg.length> 0) { %>
+                    <div class="toast error">
+                        <%= error_msg %>
+                    </div>
+                    <% } %>
 
-            <% if (errors && errors.length > 0) { %>
-                <ul class="errors">
-                    <% errors.forEach(error => { %>
-                        <li><%= error.msg %></li>
-                    <% }) %>
-                </ul>
-            <% } %>
+                        <% if (errors && errors.length> 0) { %>
+                            <ul class="errors">
+                                <% errors.forEach(error=> { %>
+                                    <li>
+                                        <%= error.msg %>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                            <% } %>
 
-            <form action="/admin/users/edit/<%= user.id %>" method="POST">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <form action="/admin/users/edit/<%= user.id %>" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-                <label for="username">Имя пользователя:</label>
-                <input type="text" id="username" name="username" value="<%= user.username %>" required>
+                                    <label for="username">Имя пользователя:</label>
+                                    <input type="text" id="username" name="username" value="<%= user.username %>"
+                                        required>
 
-                <label for="role">Роль:</label>
-                <select id="role" name="role" required>
-                    <option value="">Выберите роль</option>
-                    <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Админ</option>
-                    <!-- В будущем можно добавить другие роли -->
-                </select>
+                                    <label for="role">Роль:</label>
+                                    <select id="role" name="role" required>
+                                        <option value="">Выберите роль</option>
+                                        <option value="admin" <%=user.role==='admin' ? 'selected' : '' %>>Админ</option>
+                                        <!-- В будущем можно добавить другие роли -->
+                                    </select>
 
-                <button type="submit" class="form-login-button">Сохранить Изменения</button>
-            </form>
-            <a href="/admin/users" class="button">Вернуться назад</a>
-        </div>
-    </main>
-    <%- include('../partials/footer') %>
+                                    <button type="submit" class="form-login-button">Сохранить Изменения</button>
+                                </form>
+                                <div style="margin-top: 1.5rem;">
+                                    <a href="/admin/users" class="button">Вернуться назад</a>
+                                </div>
+            </div>
+        </main>
+        <%- include('../partials/footer') %>
 </body>
+
 </html>
