@@ -42,6 +42,10 @@ main {
     text-align: left; /* Выравнивание текста по левому краю */
     transition: background-color 0.3s, box-shadow 0.3s;
     cursor: pointer; /* Курсор указателя при наведении */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .product-card:hover {
@@ -55,10 +59,6 @@ main {
     height: 15rem;
     border-radius: 4px;
     margin-bottom: 1rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    display: flex;
 }
 
 /* Название продукта */
