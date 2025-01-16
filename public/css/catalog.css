@@ -55,6 +55,7 @@ main {
     height: 15rem;
     border-radius: 4px;
     margin-bottom: 1rem;
+    justify-content: center;
 }
 
 /* Название продукта */
